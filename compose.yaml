@@ -1,10 +1,33 @@
+version: '3'
 services:
-  mysql:
-    image: 'mysql:latest'
-    environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+  app1:
+    image: my-spring-app:latest
     ports:
-      - '3306'
+      - "8081:8080"
+    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/db1
+#      - SPRING_DATASOURCE_USERNAME=user1
+#      - SPRING_DATASOURCE_PASSWORD=pass1
+      - MY_CUSTOM_ENV_VAR=One
+#    depends_on:
+#      - mysql-db
+
+  app2:
+    image: my-spring-app:latest
+    ports:
+      - "8082:8080"
+    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/db2
+#      - SPRING_DATASOURCE_USERNAME=user2
+#      - SPRING_DATASOURCE_PASSWORD=pass2
+      - MY_CUSTOM_ENV_VAR=Two
+#    depends_on:
+#      - mysql-db
+
+#  mysql-db:
+#    image: mysql:8.0
+#    environment:
+#      MYSQL_ROOT_PASSWORD: secret
+#      MYSQL_DATABASE: db1
+#    ports:
+#      - "3306:3306"
